@@ -1,1 +1,2596 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoolTech AC Service - Jasa Service AC Profesional Mataram Lombok</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        :root {
+            --primary: #0066ff;
+            --primary-dark: #0044cc;
+            --secondary: #00c8ff;
+            --accent: #ff6b35;
+            --dark: #1a1a2e;
+            --darker: #0f0f1e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, #0066ff 0%, #00c8ff 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            --gradient-accent: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            --shadow: 0 10px 40px rgba(0, 102, 255, 0.15);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        /* ===== PRELOADER ===== */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.6s, visibility 0.6s;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-inner {
+            text-align: center;
+        }
+
+        .preloader-icon {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(0, 200, 255, 0.2);
+            border-top-color: var(--secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        .preloader-text {
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 18px 0;
+            transition: var(--transition);
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 12px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .navbar-brand .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.4);
+        }
+
+        .navbar-brand .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-brand .brand-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.2;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled .brand-name {
+            color: var(--dark);
+        }
+
+        .navbar-brand .brand-tagline {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled .brand-tagline {
+            color: var(--gray);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            font-size: 0.92rem;
+            padding: 10px 18px;
+            border-radius: 12px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .navbar.scrolled .nav-links a {
+            color: var(--dark);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--white);
+            background: var(--primary);
+        }
+
+        .navbar.scrolled .nav-links a:hover,
+        .navbar.scrolled .nav-links a.active {
+            color: var(--white);
+            background: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--gradient-accent) !important;
+            color: var(--white) !important;
+            font-weight: 600 !important;
+            padding: 12px 24px !important;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 107, 53, 0.5) !important;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled .hamburger span {
+            background: var(--dark);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--gradient-dark);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=1920&q=80') center/cover;
+            opacity: 0.15;
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--secondary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float-particle 15s infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; animation-duration: 12s; }
+        .particle:nth-child(2) { left: 30%; top: 60%; animation-delay: 2s; animation-duration: 18s; }
+        .particle:nth-child(3) { left: 50%; top: 30%; animation-delay: 4s; animation-duration: 14s; }
+        .particle:nth-child(4) { left: 70%; top: 70%; animation-delay: 1s; animation-duration: 16s; }
+        .particle:nth-child(5) { left: 85%; top: 40%; animation-delay: 3s; animation-duration: 20s; }
+        .particle:nth-child(6) { left: 20%; top: 80%; animation-delay: 5s; animation-duration: 13s; }
+        .particle:nth-child(7) { left: 60%; top: 15%; animation-delay: 2.5s; animation-duration: 17s; }
+        .particle:nth-child(8) { left: 90%; top: 85%; animation-delay: 1.5s; animation-duration: 15s; }
+
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            25% { opacity: 0.5; }
+            50% { transform: translateY(-100px) translateX(50px); opacity: 0.3; }
+            75% { opacity: 0.5; }
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            padding: 40px 0;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 200, 255, 0.1);
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 28px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-badge i {
+            animation: pulse-icon 2s infinite;
+        }
+
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero h1 .highlight {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 .highlight-accent {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            max-width: 520px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--white);
+            box-shadow: 0 8px 30px rgba(0, 102, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 102, 255, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--secondary);
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .btn-wa {
+            background: #25D366;
+            color: var(--white);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-wa:hover {
+            background: #20bd5a;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(37, 211, 102, 0.5);
+        }
+
+        .btn-accent {
+            background: var(--gradient-accent);
+            color: var(--white);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(255, 107, 53, 0.5);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 50px;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .hero-stat .stat-number span {
+            color: var(--secondary);
+        }
+
+        .hero-stat .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: 4px;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInRight 1s ease 0.5s both;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-floating-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 16px 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .hero-floating-card.card-1 {
+            top: -20px;
+            right: -30px;
+            animation-delay: 0s;
+        }
+
+        .hero-floating-card.card-2 {
+            bottom: 30px;
+            left: -40px;
+            animation-delay: 2s;
+        }
+
+        .hero-floating-card .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .hero-floating-card .card-text {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .hero-floating-card .card-text strong {
+            display: block;
+            font-size: 0.95rem;
+            color: var(--dark);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 64px;
+        }
+
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 102, 255, 0.08);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 16px;
+            line-height: 1.25;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* ===== SERVICES / LAYANAN ===== */
+        #layanan {
+            background: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-card-img {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-card-img img {
+            transform: scale(1.1);
+        }
+
+        .service-card-img .service-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 40%, rgba(0, 102, 255, 0.8) 100%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-overlay {
+            opacity: 1;
+        }
+
+        .service-card-body {
+            padding: 28px;
+        }
+
+        .service-icon-badge {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 18px;
+            margin-top: -52px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            font-size: 0.92rem;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+
+        .service-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 18px;
+            border-top: 1px solid #eee;
+        }
+
+        .service-price .price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .service-price .price small {
+            font-size: 0.75rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+
+        .service-price .book-link {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .service-price .book-link:hover {
+            gap: 10px;
+        }
+
+        /* ===== KEUNGGULAN / WHY US ===== */
+        #keunggulan {
+            background: var(--white);
+        }
+
+        .advantages-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .advantages-image {
+            position: relative;
+        }
+
+        .advantages-image img {
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .advantages-image .experience-badge {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 24px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+        }
+
+        .experience-badge .exp-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .experience-badge .exp-text {
+            font-size: 0.85rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .advantages-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .advantage-item {
+            display: flex;
+            gap: 20px;
+            padding: 24px;
+            border-radius: 16px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .advantage-item:hover {
+            background: var(--light);
+            border-color: rgba(0, 102, 255, 0.1);
+            transform: translateX(8px);
+        }
+
+        .advantage-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .advantage-text h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+
+        .advantage-text p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* ===== PROSES KERJA ===== */
+        #proses {
+            background: var(--gradient-dark);
+            color: var(--white);
+        }
+
+        #proses .section-title {
+            color: var(--white);
+        }
+
+        #proses .section-desc {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        #proses .section-badge {
+            background: rgba(0, 200, 255, 0.15);
+            color: var(--secondary);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 55px;
+            left: 15%;
+            width: 70%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), #25D366);
+            border-radius: 3px;
+            z-index: 0;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 24px;
+            color: white;
+            position: relative;
+        }
+
+        .step-number::after {
+            content: '';
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 2px dashed rgba(255, 255, 255, 0.15);
+            animation: spin 20s linear infinite;
+        }
+
+        .process-step h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .process-step p {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.6;
+        }
+
+        /* ===== AREA LAYANAN ===== */
+        #area {
+            background: var(--light);
+        }
+
+        .area-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .area-map {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .area-map img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+        }
+
+        .area-map-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+        }
+
+        .area-map-overlay h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .area-map-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .area-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .area-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 18px 20px;
+            background: var(--white);
+            border-radius: 14px;
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+
+        .area-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 5px 20px rgba(0, 102, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .area-item i {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(0, 102, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .area-item span {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* ===== GALERI ===== */
+        #galeri {
+            background: var(--white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 220px);
+            gap: 16px;
+        }
+
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 102, 255, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+        }
+
+        .gallery-item:nth-child(4) {
+            grid-row: span 2;
+        }
+
+        /* ===== TESTIMONI ===== */
+        #testimoni {
+            background: var(--light);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-card .quote-icon {
+            font-size: 2.5rem;
+            color: rgba(0, 102, 255, 0.1);
+            margin-bottom: 16px;
+        }
+
+        .testimonial-card .stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-card .stars i {
+            color: #ffc107;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-card .review-text {
+            font-size: 0.95rem;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testimonial-card .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .reviewer-info h5 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .reviewer-info span {
+            font-size: 0.82rem;
+            color: var(--gray);
+        }
+
+        /* ===== BOOKING SECTION ===== */
+        #booking {
+            background: var(--gradient-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #booking::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: rgba(0, 102, 255, 0.1);
+            filter: blur(80px);
+        }
+
+        #booking::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: rgba(0, 200, 255, 0.08);
+            filter: blur(80px);
+        }
+
+        .booking-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .booking-info h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 20px;
+            line-height: 1.25;
+        }
+
+        .booking-info p {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .booking-features {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 36px;
+        }
+
+        .booking-feature {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+        }
+
+        .booking-feature i {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(37, 211, 102, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #25D366;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .booking-form-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+        }
+
+        .booking-form-wrapper h3 {
+            color: var(--white);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.88rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.07);
+            color: var(--white);
+            font-size: 0.95rem;
+            font-family: 'Poppins', sans-serif;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group select option {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .btn-booking-wa {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.05rem;
+            justify-content: center;
+            margin-top: 8px;
+        }
+
+        /* ===== PROMO BANNER ===== */
+        .promo-banner {
+            background: var(--gradient-accent);
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .promo-banner .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-banner h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .promo-banner p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1rem;
+            margin-bottom: 28px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--darker);
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-about .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-about .footer-brand .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .footer-about .footer-brand h3 {
+            color: var(--white);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-socials a {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.07);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.5);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .footer-socials a:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .footer-contact-item i {
+            color: var(--secondary);
+            font-size: 1rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .footer-contact-item span {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.35);
+            font-size: 0.85rem;
+        }
+
+        /* ===== WHATSAPP FLOATING ===== */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .wa-float .wa-tooltip {
+            background: var(--white);
+            padding: 10px 18px;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--dark);
+            white-space: nowrap;
+            animation: pulse-tooltip 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-tooltip {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-5px); }
+        }
+
+        .wa-float .wa-btn {
+            width: 64px;
+            height: 64px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            text-decoration: none;
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+            transition: var(--transition);
+            animation: wa-pulse 2s infinite;
+        }
+
+        .wa-float .wa-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes wa-pulse {
+            0%, 100% { box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5); }
+            50% { box-shadow: 0 8px 50px rgba(37, 211, 102, 0.8); }
+        }
+
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0, 102, 255, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-4px);
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--gradient-dark);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 14px 40px;
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-desc {
+                margin: 0 auto 40px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .advantages-wrapper,
+            .area-content,
+            .booking-content {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 1;
+            }
+
+            .gallery-item:nth-child(4) {
+                grid-row: span 1;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .section {
+                padding: 70px 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .area-list {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: repeat(3, 180px);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .booking-info h2 {
+                font-size: 2rem;
+            }
+
+            .promo-banner h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon"></div>
+            <div class="preloader-text">COOLTECH AC</div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#beranda" class="navbar-brand">
+                <div class="logo-icon">
+                    <i class="fas fa-snowflake"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">CoolTech AC</span>
+                    <span class="brand-tagline">Service Profesional</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#beranda" class="active">Beranda</a></li>
+                <li><a href="#layanan">Layanan</a></li>
+                <li><a href="#keunggulan">Keunggulan</a></li>
+                <li><a href="#proses">Cara Kerja</a></li>
+                <li><a href="#area">Area</a></li>
+                <li><a href="#galeri">Galeri</a></li>
+                <li><a href="#testimoni">Testimoni</a></li>
+                <li><a href="#booking" class="nav-cta"><i class="fab fa-whatsapp"></i> Booking</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#beranda" onclick="closeMobile()">Beranda</a>
+        <a href="#layanan" onclick="closeMobile()">Layanan</a>
+        <a href="#keunggulan" onclick="closeMobile()">Keunggulan</a>
+        <a href="#proses" onclick="closeMobile()">Cara Kerja</a>
+        <a href="#area" onclick="closeMobile()">Area Layanan</a>
+        <a href="#galeri" onclick="closeMobile()">Galeri</a>
+        <a href="#testimoni" onclick="closeMobile()">Testimoni</a>
+        <a href="#booking" onclick="closeMobile()" style="background: #25D366; border-radius: 12px; margin-top: 10px;">
+            <i class="fab fa-whatsapp"></i> Booking Sekarang
+        </a>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="beranda">
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-certificate"></i>
+                    Service AC Terpercaya di Mataram - Lombok
+                </div>
+                <h1>Solusi <span class="highlight">Service AC</span> Profesional & <span class="highlight-accent">Bergaransi</span></h1>
+                <p class="hero-desc">
+                    Layanan perawatan, perbaikan, dan instalasi AC terbaik di Mataram dan seluruh Lombok. 
+                    Dikerjakan oleh teknisi berpengalaman dengan garansi resmi hingga 6 bulan.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#booking" class="btn btn-wa">
+                        <i class="fab fa-whatsapp"></i> Booking via WhatsApp
+                    </a>
+                    <a href="#layanan" class="btn btn-outline">
+                        <i class="fas fa-tools"></i> Lihat Layanan
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="stat-number">5000<span>+</span></div>
+                        <div class="stat-label">Pelanggan Puas</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="stat-number">10<span>+</span></div>
+                        <div class="stat-label">Tahun Pengalaman</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="stat-number">24<span>/7</span></div>
+                        <div class="stat-label">Layanan Darurat</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80" alt="Teknisi AC Profesional CoolTech Mataram">
+                    <div class="hero-floating-card card-1">
+                        <div class="card-icon" style="background: var(--gradient-primary);">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="card-text">
+                            <strong>Garansi Resmi</strong>
+                            Hingga 6 Bulan
+                        </div>
+                    </div>
+                    <div class="hero-floating-card card-2">
+                        <div class="card-icon" style="background: #25D366;">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="card-text">
+                            <strong>Rating 4.9/5</strong>
+                            Dari 2000+ Review
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAYANAN / SERVICES -->
+    <section class="section" id="layanan">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-cogs"></i> Layanan Kami
+                </div>
+                <h2 class="section-title">Layanan Service AC Lengkap & Profesional</h2>
+                <p class="section-desc">Kami menyediakan berbagai layanan AC untuk rumah, kantor, dan gedung komersial di seluruh Mataram dan Lombok.</p>
+            </div>
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-card-img">
+                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80" alt="Cuci AC Mataram Lombok">
+                        <div class="service-overlay"></div>
+                    </div>
+                    <div class="service-card-body">
+                        <div class="service-icon-badge" style="background: var(--gradient-primary);">
+                            <i class="fas fa-shower"></i>
+                        </div>
+                        <h3>Cuci AC (AC Cleaning)</h3>
+                        <p>Pembersihan menyeluruh indoor & outdoor unit, termasuk filter, evaporator, dan kondensor untuk performa optimal.</p>
+                        <div class="service-price">
+                            <div class="price">Rp 75.000 <small>/ unit</small></div>
+                            <a href="https://wa.me/6281234567890?text=Halo%20CoolTech,%20saya%20ingin%20booking%20layanan%20Cuci%20AC.%20Mohon%20info%20lebih%20lanjut." class="book-link" target="_blank">
+                                Booking <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-card-img">
+                        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80" alt="Service AC Mataram Lombok">
+                        <div class="service-overlay"></div>
+                    </div>
+                    <div class="service-card-body">
+                        <div class="service-icon-badge" style="background: var(--gradient-accent);">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <h3>Perbaikan AC (Repair)</h3>
+                        <p>Diagnosa dan perbaikan segala kerusakan AC: tidak dingin, bocor, bunyi abnormal, error code, dan masalah lainnya.</p>
+                        <div class="service-price">
+                            <div class="price">Rp 150.000 <small>/ mulai</small></div>
+                            <a href="https://wa.me/6281234567890?text=Halo%20CoolTech,%20saya%20ingin%20booking%20layanan%20Perbaikan%20AC.%20Mohon%20info%20lebih%20lanjut." class="book-link" target="_blank">
+                                Booking <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-card-img">
+                        <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80" alt="Instalasi AC Baru Mataram Lombok">
+                        <div class="service-overlay"></div>
+                    </div>
+                    <div class="service-card-body">
+                        <div class="service-icon-badge" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h3>Instalasi AC Baru</h3>
+                        <p>Pemasangan AC baru semua merek dengan instalasi rapi, vakum sistem, dan testing performa sebelum serah terima.</p>
+                        <div class="service-price">
+                            <div class="price">Rp 350.000 <small>/ unit</small></div>
+                            <a href="https://wa.me/6281234567890?text=Halo%20CoolTech,%20saya%20ingin%20booking%20layanan%20Instalasi%20AC%20Baru.%20Mohon%20info%20lebih%20lanjut." class="book-link" target="_blank">
+                                Booking <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-card-img">
+                        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80" alt="Isi Freon AC Mataram Lombok">
+                        <div class="service-overlay"></div>
+                    </div>
+                    <div class="service-card-body">
+                        <div class="service-icon-badge" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">
+                            <i class="fas fa-temperature-low"></i>
+                        </div>
+                        <h3>Isi Freon / Refrigerant</h3>
+                        <p>Pengisian dan penambahan freon R22, R32, R410A dengan tekanan sesuai standar pabrikan untuk pendinginan maksimal.</p>
+                        <div class="service-price">
+                            <div class="price">Rp 200.000 <small>/ mulai</small></div>
+                            <a href="https://wa.me/6281234567890?text=Halo%20CoolTech,%20saya%20ingin%20booking%20layanan%20Isi%20Freon%20AC.%20Mohon%20info%20lebih%20lanjut." class="book-link" target="_blank">
+                                Booking <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-card-img">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80" alt="Bongkar Pasang AC Mataram Lombok">
+                        <div class="service-overlay"></div>
+                    </div>
+                    <div class="service-card-body">
+                        <div class="service-icon-badge" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h3>Bongkar Pasang AC</h3>
+                        <p>Layanan bongkar dan pasang ulang AC untuk keperluan pindahan rumah, renovasi, atau relokasi unit ke ruangan lain.</p>
+                        <div class="service-price">
+                            <div class="price">Rp 300.000 <small>/ unit</small></div>
+                            <a href="https://wa.me/6281234567890?text=Halo%20CoolTech,%20saya%20ingin%20booking%20layanan%20Bongkar%20Pasang%20AC.%20Mohon%20info%20lebih%20lanjut." class="book-link" target="_blank">
+                                Booking <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-card-img">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="Service AC Kantor Mataram Lombok">
+                        <div class="service-overlay"></div>
+                    </div>
+                    <div class="service-card-body">
+                        <div class="service-icon-badge" style="background: linear-gradient(135deg, #10b981, #059669);">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3>Kontrak Maintenance</h3>
+                        <p>Paket perawatan berkala untuk kantor, hotel, restoran, dan gedung komersial. Jadwal fleksibel dengan harga spesial.</p>
+                        <div class="service-price">
+                            <div class="price">Custom <small>/ hubungi kami</small></div>
+                            <a href="https://wa.me/6281234567890?text=Halo%20CoolTech,%20saya%20tertarik%20dengan%20paket%20Kontrak%20Maintenance%20AC.%20Mohon%20info%20lebih%20lanjut." class="book-link" target="_blank">
+                                Booking <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEUNGGULAN -->
+    <section class="section" id="keunggulan">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-trophy"></i> Mengapa Kami?
+                </div>
+                <h2 class="section-title">Keunggulan CoolTech AC Service</h2>
+                <p class="section-desc">Komitmen kami memberikan layanan terbaik dengan standar profesional dan kepuasan pelanggan sebagai prioritas utama.</p>
+            </div>
+            <div class="advantages-wrapper">
+                <div class="advantages-image">
+                    <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&q=80" alt="Teknisi AC Berpengalaman Mataram Lombok">
+                    <div class="experience-badge">
+                        <div class="exp-number">10+</div>
+                        <div class="exp-text">Tahun Pengalaman</div>
+                    </div>
+                </div>
+                <div class="advantages-list">
+                    <div class="advantage-item">
+                        <div class="advantage-icon" style="background: rgba(0, 102, 255, 0.1); color: var(--primary);">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="advantage-text">
+                            <h4>Teknisi Bersertifikat</h4>
+                            <p>Seluruh teknisi kami telah bersertifikat dan terlatih menangani semua merek AC: Daikin, Panasonic, LG, Samsung, Sharp, dll.</p>
+                        </div>
+                    </div>
+                    <div class="advantage-item">
+                        <div class="advantage-icon" style="background: rgba(37, 211, 102, 0.1); color: #25D366;">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="advantage-text">
+                            <h4>Garansi Service 6 Bulan</h4>
+                            <p>Setiap pekerjaan yang kami kerjakan mendapat garansi hingga 6 bulan. Jika ada masalah, kami datang kembali tanpa biaya tambahan.</p>
+                        </div>
+                    </div>
+                    <div class="advantage-item">
+                        <div class="advantage-icon" style="background: rgba(255, 107, 53, 0.1); color: var(--accent);">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <div class="advantage-text">
+                            <h4>Harga Transparan</h4>
+                            <p>Tanpa biaya tersembunyi. Kami berikan estimasi harga di awal sebelum pengerjaan dimulai agar Anda bisa budgeting dengan tepat.</p>
+                        </div>
+                    </div>
+                    <div class="advantage-item">
+                        <div class="advantage-icon" style="background: rgba(99, 102, 241, 0.1); color: #6366f1;">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="advantage-text">
+                            <h4>Respon Cepat 30 Menit</h4>
+                            <p>Tim kami siap datang ke lokasi Anda dalam 30 menit setelah booking dikonfirmasi. Layanan darurat tersedia 24 jam.</p>
+                        </div>
+                    </div>
+                    <div class="advantage-item">
+                        <div class="advantage-icon" style="background: rgba(236, 72, 153, 0.1); color: #ec4899;">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="advantage-text">
+                            <h4>Spare Part Original</h4>
+                            <p>Kami hanya menggunakan spare part original dan bergaransi untuk setiap penggantian komponen AC Anda.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROSES KERJA -->
+    <section class="section" id="proses">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-list-ol"></i> Cara Kerja
+                </div>
+                <h2 class="section-title">Proses Booking Mudah & Cepat</h2>
+                <p class="section-desc">Hanya 4 langkah mudah untuk mendapatkan layanan service AC terbaik di Mataram dan Lombok.</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number" style="background: var(--gradient-primary);">1</div>
+                    <h4>Hubungi via WhatsApp</h4>
+                    <p>Klik tombol WhatsApp dan kirimkan keluhan atau kebutuhan service AC Anda kepada kami.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number" style="background: linear-gradient(135deg, #06b6d4, #0891b2);">2</div>
+                    <h4>Konsultasi & Estimasi</h4>
+                    <p>Tim kami akan memberikan konsultasi gratis dan estimasi biaya sebelum pengerjaan dimulai.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number" style="background: var(--gradient-accent);">3</div>
+                    <h4>Teknisi Datang</h4>
+                    <p>Teknisi berpengalaman kami datang ke lokasi Anda sesuai jadwal yang telah disepakati.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number" style="background: #25D366;">4</div>
+                    <h4>AC Nyaman & Garansi</h4>
+                    <p>AC Anda kembali dingin optimal dengan garansi service hingga 6 bulan. Bayar setelah puas!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AREA LAYANAN -->
+    <section class="section" id="area">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-map-marker-alt"></i> Jangkauan Kami
+                </div>
+                <h2 class="section-title">Area Layanan Service AC</h2>
+                <p class="section-desc">Kami melayani seluruh wilayah Mataram dan Lombok dengan jangkauan luas untuk kenyamanan Anda.</p>
+            </div>
+            <div class="area-content">
+                <div class="area-map">
+                    <img src="https://images.unsplash.com/photo-1596437494606-185a116a0bd6?w=600&q=80" alt="Peta Area Layanan CoolTech AC Mataram Lombok">
+                    <div class="area-map-overlay">
+                        <h4><i class="fas fa-map-marked-alt"></i> Melayani Seluruh Pulau Lombok</h4>
+                        <p>Kota Mataram, Lombok Barat, Lombok Tengah, Lombok Timur, Lombok Utara & KLU</p>
+                    </div>
+                </div>
+                <div class="area-list">
+                    <div class="area-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Mataram Kota</span>
+                    </div>
+                    <div class="area-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Cakranegara</span>
+                    </div>
+                    <div class="area-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Ampenan</span>
+                    </div>
+                    <div class="area-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Sekarbela</span>
+                    </div>
+                    <div class="area-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Selaparang</span>
+                    </div>
+                    <div class="area-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Sandubaya</span>
+                    </div>
+                    <div class="area-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Lombok Barat</span>
+                    </div>
+                    <div class="area-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Lombok Tengah</span>
+                    </div>
+                    <div class="area-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Lombok Timur</span>
+                    </div>
+                    <div class="area-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Lombok Utara</span>
+                    </div>
+                    <div class="area-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Senggigi</span>
+                    </div>
+                    <div class="area-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Praya & Sekitar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERI -->
+    <section class="section" id="galeri">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-images"></i> Galeri Kerja
+                </div>
+                <h2 class="section-title">Dokumentasi Pekerjaan Kami</h2>
+                <p class="section-desc">Lihat hasil pekerjaan tim CoolTech AC dalam menangani berbagai jenis dan merek AC di Mataram dan Lombok.</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80" alt="Galeri Service AC CoolTech 1">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80" alt="Galeri Service AC CoolTech 2">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80" alt="Galeri Service AC CoolTech 3">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80" alt="Galeri Service AC CoolTech 4">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80" alt="Galeri Service AC CoolTech 5">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="Galeri Service AC CoolTech 6">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONI -->
+    <section class="section" id="testimoni">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-comments"></i> Testimoni
+                </div>
+                <h2 class="section-title">Apa Kata Pelanggan Kami?</h2>
+                <p class="section-desc">Ribuan pelanggan puas telah mempercayakan kebutuhan AC mereka kepada CoolTech. Berikut beberapa testimoni mereka.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"AC di rumah sudah 2 minggu tidak dingin, setelah hubungi CoolTech langsung datang teknisi dalam 30 menit. Sekarang AC dingin banget! Pelayanannya ramah dan harga sesuai estimasi awal."</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">AS</div>
+                        <div class="reviewer-info">
+                            <h5>Andi Saputra</h5>
+                            <span>Warga Cakranegara, Mataram</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"Kami pakai jasa CoolTech untuk maintenance AC di hotel kami. Sangat profesional, terjadwal rapi, dan harga kontraknya sangat kompetitif. Recommended untuk bisnis!"</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar" style="background: var(--gradient-accent);">NL</div>
+                        <div class="reviewer-info">
+                            <h5>Ni Luh Diah</h5>
+                            <span>Manager Hotel, Senggigi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="review-text">"Booking lewat WhatsApp sangat mudah! Teknisinya datang tepat waktu, kerjanya rapi dan bersih. AC saya yang bocor sekarang sudah normal kembali. Terima kasih CoolTech!"</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">MR</div>
+                        <div class="reviewer-info">
+                            <h5>Muhammad Rizki</h5>
+                            <span>Warga Praya, Lombok Tengah</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROMO BANNER -->
+    <div class="promo-banner">
+        <div class="container">
+            <h2>🎉 Promo Spesial Bulan Ini!</h2>
+            <p>Diskon 20% untuk Cuci AC + Isi Freon. Berlaku untuk seluruh area Mataram dan Lombok!</p>
+            <a href="https://wa.me/6281234567890?text=Halo%20CoolTech,%20saya%20tertarik%20dengan%20Promo%20Cuci%20AC%20%2B%20Isi%20Freon%20diskon%2020%25.%20Mohon%20info%20lebih%20lanjut." class="btn btn-primary" target="_blank">
+                <i class="fab fa-whatsapp"></i> Klaim Promo Sekarang
+            </a>
+        </div>
+    </div>
+
+    <!-- BOOKING SECTION -->
+    <section class="section" id="booking">
+        <div class="container">
+            <div class="booking-content">
+                <div class="booking-info">
+                    <div class="section-badge" style="background: rgba(0, 200, 255, 0.15); color: var(--secondary);">
+                        <i class="fab fa-whatsapp"></i> Booking Sekarang
+                    </div>
+                    <h2>Booking Layanan AC via <span style="color: #25D366;">WhatsApp</span></h2>
+                    <p>Isi form di samping dan klik tombol Booking. Data Anda akan otomatis terkirim ke WhatsApp kami untuk proses lebih cepat!</p>
+                    <div class="booking-features">
+                        <div class="booking-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Respon WhatsApp dalam 5 menit</span>
+                        </div>
+                        <div class="booking-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Konsultasi gratis sebelum service</span>
+                        </div>
+                        <div class="booking-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Estimasi harga transparan</span>
+                        </div>
+                        <div class="booking-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Jadwal fleksibel sesuai keinginan Anda</span>
+                        </div>
+                        <div class="booking-feature">
+                            <i class="fas fa-check"></i>
+                            <span>Garansi service hingga 6 bulan</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 16px; border: 1px solid rgba(255,255,255,0.1);">
+                        <div style="width: 56px; height: 56px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; flex-shrink: 0;">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <div style="color: rgba(255,255,255,0.5); font-size: 0.82rem;">Chat Langsung</div>
+                            <div style="color: white; font-size: 1.2rem; font-weight: 700;">081-234-567-890</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="booking-form-wrapper">
+                    <h3><i class="fas fa-calendar-check"></i> Form Booking Service</h3>
+                    <form id="bookingForm" onsubmit="return sendToWhatsApp(event)">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Nama Lengkap</label>
+                            <input type="text" id="nama" placeholder="Masukkan nama lengkap Anda" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-phone"></i> Nomor WhatsApp</label>
+                            <input type="tel" id="telepon" placeholder="Contoh: 081234567890" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Alamat Lengkap</label>
+                            <input type="text" id="alamat" placeholder="Alamat di Mataram / Lombok" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-cogs"></i> Jenis Layanan</label>
+                            <select id="layananSelect" required>
+                                <option value="">-- Pilih Layanan --</option>
+                                <option value="Cuci AC (AC Cleaning)">Cuci AC (AC Cleaning)</option>
+                                <option value="Perbaikan AC (Repair)">Perbaikan AC (Repair)</option>
+                                <option value="Instalasi AC Baru">Instalasi AC Baru</option>
+                                <option value="Isi Freon / Refrigerant">Isi Freon / Refrigerant</option>
+                                <option value="Bongkar Pasang AC">Bongkar Pasang AC</option>
+                                <option value="Kontrak Maintenance">Kontrak Maintenance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-comment-dots"></i> Keluhan / Catatan</label>
+                            <textarea id="keluhan" placeholder="Jelaskan keluhan AC Anda..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-wa btn-booking-wa">
+                            <i class="fab fa-whatsapp"></i> Kirim Booking via WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-brand">
+                        <div class="logo-icon"><i class="fas fa-snowflake"></i></div>
+                        <h3>CoolTech AC</h3>
+                    </div>
+                    <p>Penyedia jasa service AC profesional dan terpercaya di Mataram, Lombok. Melayani perawatan, perbaikan, dan instalasi AC untuk rumah dan bisnis Anda sejak 2014.</p>
+                    <div class="footer-socials">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Layanan</h4>
+                    <ul class="footer-links">
+                        <li><a href="#layanan"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Cuci AC</a></li>
+                        <li><a href="#layanan"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Perbaikan AC</a></li>
+                        <li><a href="#layanan"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Instalasi AC</a></li>
+                        <li><a href="#layanan"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Isi Freon</a></li>
+                        <li><a href="#layanan"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Bongkar Pasang</a></li>
+                        <li><a href="#layanan"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Kontrak Maintenance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigasi</h4>
+                    <ul class="footer-links">
+                        <li><a href="#beranda"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Beranda</a></li>
+                        <li><a href="#keunggulan"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Keunggulan</a></li>
+                        <li><a href="#proses"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Cara Kerja</a></li>
+                        <li><a href="#area"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Area Layanan</a></li>
+                        <li><a href="#galeri"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Galeri</a></li>
+                        <li><a href="#testimoni"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Testimoni</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Hubungi Kami</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Jl. Pejanggik No. 123, Mataram, NTB 83116</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>081-234-567-890</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@cooltechac.id</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Senin - Minggu: 08.00 - 21.00 WITA<br>Layanan Darurat: 24 Jam</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CoolTech AC Service Mataram - Lombok. All Rights Reserved.</p>
+                <p>Designed with <i class="fas fa-heart" style="color: #ff6b35;"></i> for Lombok</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOATING BUTTON -->
+    <div class="wa-float">
+        <div class="wa-tooltip">💬 Chat Sekarang!</div>
+        <a href="https://wa.me/6281234567890?text=Halo%20CoolTech%20AC,%20saya%20ingin%20konsultasi%20tentang%20service%20AC.%20Mohon%20bantuannya." class="wa-btn" target="_blank" title="Chat WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- BACK TO TOP -->
+    <a href="#beranda" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <script>
+        // ===== PRELOADER =====
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // ===== NAVBAR SCROLL =====
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.add('scrolled');
+                backToTop.classList.add('show');
+            } else {
+                navbar.classList.remove('scrolled');
+                backToTop.classList.remove('show');
+            }
+
+            // Active nav link
+            const sections = document.querySelectorAll('section[id], .hero[id]');
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ===== HAMBURGER MENU =====
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        function closeMobile() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ===== BOOKING FORM -> WHATSAPP =====
+        function sendToWhatsApp(e) {
+            e.preventDefault();
+
+            const nama = document.getElementById('nama').value;
+            const telepon = document.getElementById('telepon').value;
+            const alamat = document.getElementById('alamat').value;
+            const layanan = document.getElementById('layananSelect').value;
+            const keluhan = document.getElementById('keluhan').value;
+
+            let pesan = `Halo CoolTech AC Service! 🙏%0A%0A`;
+            pesan += `Saya ingin booking layanan service AC:%0A%0A`;
+            pesan += `📋 *Data Pemesan*%0A`;
+            pesan += `━━━━━━━━━━━━━━━━━━%0A`;
+            pesan += `👤 Nama: ${nama}%0A`;
+            pesan += `📱 Telepon: ${telepon}%0A`;
+            pesan += `📍 Alamat: ${alamat}%0A`;
+            pesan += `🔧 Layanan: ${layanan}%0A`;
+            pesan += `━━━━━━━━━━━━━━━━━━%0A%0A`;
+            
+            if (keluhan) {
+                pesan += `📝 *Keluhan/Catatan:*%0A${keluhan}%0A%0A`;
+            }
+            
+            pesan += `Mohon info jadwal dan estimasi biayanya. Terima kasih! 🙏`;
+
+            const waURL = `https://wa.me/6281234567890?text=${pesan}`;
+            window.open(waURL, '_blank');
+            return false;
+        }
+
+        // ===== SCROLL REVEAL ANIMATION =====
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .advantage-item, .process-step, .area-item, .gallery-item, .testimonial-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+            observer.observe(el);
+        });
+
+        // ===== COUNTER ANIMATION =====
+        function animateCounters() {
+            document.querySelectorAll('.stat-number').forEach(counter => {
+                const text = counter.textContent;
+                const match = text.match(/(\d+)/);
+                if (!match) return;
+                
+                const target = parseInt(match[0]);
+                const suffix = text.replace(match[0], '');
+                let current = 0;
+                const increment = target / 60;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.innerHTML = Math.floor(current) + suffix;
+                }, 30);
+            });
+        }
+
+        // Trigger counter animation when hero is visible
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    heroObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const heroStats = document.querySelector('.hero-stats');
+        if (heroStats) heroObserver.observe(heroStats);
+    </script>
+</body>
+</html>
