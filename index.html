@@ -39,8 +39,10 @@
         body {
             font-family: 'Poppins', sans-serif;
             color: var(--dark);
-            overflow-x: hidden;
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
             background: var(--white);
+            position: relative;
         }
 
         /* ===== PRELOADER ===== */
@@ -56,6 +58,11 @@
             justify-content: center;
             z-index: 99999;
             transition: opacity 0.6s, visibility 0.6s;
+            pointer-events: none;
+        }
+
+        .preloader:not(.hidden) {
+            pointer-events: all;
         }
 
         .preloader.hidden {
@@ -892,93 +899,6 @@
             line-height: 1.6;
         }
 
-        /* ===== AREA LAYANAN ===== */
-        #area {
-            background: var(--light);
-        }
-
-        .area-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .area-map {
-            position: relative;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .area-map img {
-            width: 100%;
-            height: 420px;
-            object-fit: cover;
-        }
-
-        .area-map-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 30px;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-            color: white;
-        }
-
-        .area-map-overlay h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-
-        .area-map-overlay p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .area-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .area-item {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 18px 20px;
-            background: var(--white);
-            border-radius: 14px;
-            transition: var(--transition);
-            border: 1px solid #eee;
-        }
-
-        .area-item:hover {
-            border-color: var(--primary);
-            box-shadow: 0 5px 20px rgba(0, 102, 255, 0.1);
-            transform: translateY(-3px);
-        }
-
-        .area-item i {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: rgba(0, 102, 255, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-
-        .area-item span {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-
         /* ===== GALERI ===== */
         #galeri {
             background: var(--white);
@@ -1584,6 +1504,42 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
+        /* ===== REVEAL ANIMATION ===== */
+        .reveal-init {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal-active {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .service-card.reveal-init:nth-child(1) { transition-delay: 0.05s; }
+        .service-card.reveal-init:nth-child(2) { transition-delay: 0.1s; }
+        .service-card.reveal-init:nth-child(3) { transition-delay: 0.15s; }
+        .service-card.reveal-init:nth-child(4) { transition-delay: 0.2s; }
+        .service-card.reveal-init:nth-child(5) { transition-delay: 0.25s; }
+        .service-card.reveal-init:nth-child(6) { transition-delay: 0.3s; }
+
+        .advantage-item.reveal-init:nth-child(1) { transition-delay: 0.05s; }
+        .advantage-item.reveal-init:nth-child(2) { transition-delay: 0.1s; }
+        .advantage-item.reveal-init:nth-child(3) { transition-delay: 0.15s; }
+        .advantage-item.reveal-init:nth-child(4) { transition-delay: 0.2s; }
+        .advantage-item.reveal-init:nth-child(5) { transition-delay: 0.25s; }
+
+        .process-step.reveal-init:nth-child(1) { transition-delay: 0.05s; }
+        .process-step.reveal-init:nth-child(2) { transition-delay: 0.15s; }
+        .process-step.reveal-init:nth-child(3) { transition-delay: 0.25s; }
+        .process-step.reveal-init:nth-child(4) { transition-delay: 0.35s; }
+
+        @supports not (backdrop-filter: blur(20px)) {
+            .navbar.scrolled { background: rgba(255, 255, 255, 0.98); }
+            .booking-form-wrapper { background: rgba(26, 26, 46, 0.95); }
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .hero .container {
@@ -1591,230 +1547,60 @@
                 text-align: center;
             }
 
-            .hero-visual {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-
-            .hero-desc {
-                margin: 0 auto 40px;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .hero-stats {
-                justify-content: center;
-            }
-
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .hero-visual { display: none; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero-desc { margin: 0 auto 40px; }
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
 
             .advantages-wrapper,
-            .area-content,
             .booking-content {
                 grid-template-columns: 1fr;
             }
 
-            .process-steps {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .process-steps::before {
-                display: none;
-            }
+            .process-steps { grid-template-columns: repeat(2, 1fr); }
+            .process-steps::before { display: none; }
 
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
                 grid-template-rows: auto;
             }
 
-            .gallery-item:nth-child(1) {
-                grid-column: span 1;
-            }
-
-            .gallery-item:nth-child(4) {
-                grid-row: span 1;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .gallery-item:nth-child(1) { grid-column: span 1; }
+            .gallery-item:nth-child(4) { grid-row: span 1; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .mobile-menu {
-                display: flex;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero-stats {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .section {
-                padding: 70px 0;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .process-steps {
-                grid-template-columns: 1fr;
-            }
-
-            .area-list {
-                grid-template-columns: 1fr;
-            }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .mobile-menu { display: flex; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .section { padding: 70px 0; }
+            .section-title { font-size: 2rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr; }
 
             .gallery-grid {
                 grid-template-columns: 1fr 1fr;
                 grid-template-rows: repeat(3, 180px);
             }
 
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-bottom {
-                justify-content: center;
-                text-align: center;
-            }
-
-            .booking-info h2 {
-                font-size: 2rem;
-            }
-
-            .promo-banner h2 {
-                font-size: 1.6rem;
-            }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { justify-content: center; text-align: center; }
+            .booking-info h2 { font-size: 2rem; }
+            .promo-banner h2 { font-size: 1.6rem; }
         }
 
         @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
-            }
+            .hero h1 { font-size: 1.8rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; justify-content: center; }
+            .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
         }
-
-        
-    /* ===== REVEAL ANIMATION SYSTEM (FIXED) ===== */
-.reveal-init {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
-                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.reveal-active {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
-
-/* Staggered animation untuk grid items */
-.service-card.reveal-init:nth-child(1) { transition-delay: 0.05s; }
-.service-card.reveal-init:nth-child(2) { transition-delay: 0.1s; }
-.service-card.reveal-init:nth-child(3) { transition-delay: 0.15s; }
-.service-card.reveal-init:nth-child(4) { transition-delay: 0.2s; }
-.service-card.reveal-init:nth-child(5) { transition-delay: 0.25s; }
-.service-card.reveal-init:nth-child(6) { transition-delay: 0.3s; }
-
-.advantage-item.reveal-init:nth-child(1) { transition-delay: 0.05s; }
-.advantage-item.reveal-init:nth-child(2) { transition-delay: 0.1s; }
-.advantage-item.reveal-init:nth-child(3) { transition-delay: 0.15s; }
-.advantage-item.reveal-init:nth-child(4) { transition-delay: 0.2s; }
-.advantage-item.reveal-init:nth-child(5) { transition-delay: 0.25s; }
-
-.process-step.reveal-init:nth-child(1) { transition-delay: 0.05s; }
-.process-step.reveal-init:nth-child(2) { transition-delay: 0.15s; }
-.process-step.reveal-init:nth-child(3) { transition-delay: 0.25s; }
-.process-step.reveal-init:nth-child(4) { transition-delay: 0.35s; }
-
-/* FALLBACK: Jika JS tidak jalan, semua konten tetap tampil */
-noscript ~ * .service-card,
-noscript ~ * .advantage-item,
-noscript ~ * .process-step,
-noscript ~ * .area-item,
-noscript ~ * .gallery-item,
-noscript ~ * .testimonial-card {
-    opacity: 1 !important;
-    transform: none !important;
-}
-
-/* Pastikan preloader tidak block interaksi */
-.preloader {
-    pointer-events: none; /* Jangan block klik */
-}
-
-.preloader:not(.hidden) {
-    pointer-events: all; /* Block hanya saat loading */
-}
-
-/* Pastikan body selalu bisa scroll */
-html, body {
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-}
-
-/* Override saat mobile menu aktif */
-body.mobile-menu-open {
-    overflow-y: hidden !important;
-}
-
-/* Fallback untuk browser lama */
-@supports not (backdrop-filter: blur(20px)) {
-    .navbar.scrolled {
-        background: rgba(255, 255, 255, 0.98);
-    }
-    .booking-form-wrapper {
-        background: rgba(26, 26, 46, 0.95);
-    }
-}
-    
-    
-    
-    
-    
     </style>
 </head>
 <body>
@@ -1844,7 +1630,6 @@ body.mobile-menu-open {
                 <li><a href="#layanan">Layanan</a></li>
                 <li><a href="#keunggulan">Keunggulan</a></li>
                 <li><a href="#proses">Cara Kerja</a></li>
-                <li><a href="#area">Area</a></li>
                 <li><a href="#galeri">Galeri</a></li>
                 <li><a href="#testimoni">Testimoni</a></li>
                 <li><a href="#booking" class="nav-cta"><i class="fab fa-whatsapp"></i> Booking</a></li>
@@ -1863,7 +1648,6 @@ body.mobile-menu-open {
         <a href="#layanan" onclick="closeMobile()">Layanan</a>
         <a href="#keunggulan" onclick="closeMobile()">Keunggulan</a>
         <a href="#proses" onclick="closeMobile()">Cara Kerja</a>
-        <a href="#area" onclick="closeMobile()">Area Layanan</a>
         <a href="#galeri" onclick="closeMobile()">Galeri</a>
         <a href="#testimoni" onclick="closeMobile()">Testimoni</a>
         <a href="#booking" onclick="closeMobile()" style="background: #25D366; border-radius: 12px; margin-top: 10px;">
@@ -1954,7 +1738,6 @@ body.mobile-menu-open {
                 <p class="section-desc">Kami menyediakan berbagai layanan AC untuk rumah, kantor, dan gedung komersial di seluruh Mataram dan Lombok.</p>
             </div>
             <div class="services-grid">
-                <!-- Service 1 -->
                 <div class="service-card">
                     <div class="service-card-img">
                         <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80" alt="Cuci AC Mataram Lombok">
@@ -1975,7 +1758,6 @@ body.mobile-menu-open {
                     </div>
                 </div>
 
-                <!-- Service 2 -->
                 <div class="service-card">
                     <div class="service-card-img">
                         <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80" alt="Service AC Mataram Lombok">
@@ -1996,7 +1778,6 @@ body.mobile-menu-open {
                     </div>
                 </div>
 
-                <!-- Service 3 -->
                 <div class="service-card">
                     <div class="service-card-img">
                         <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&q=80" alt="Instalasi AC Baru Mataram Lombok">
@@ -2017,7 +1798,6 @@ body.mobile-menu-open {
                     </div>
                 </div>
 
-                <!-- Service 4 -->
                 <div class="service-card">
                     <div class="service-card-img">
                         <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80" alt="Isi Freon AC Mataram Lombok">
@@ -2038,7 +1818,6 @@ body.mobile-menu-open {
                     </div>
                 </div>
 
-                <!-- Service 5 -->
                 <div class="service-card">
                     <div class="service-card-img">
                         <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80" alt="Bongkar Pasang AC Mataram Lombok">
@@ -2059,7 +1838,6 @@ body.mobile-menu-open {
                     </div>
                 </div>
 
-                <!-- Service 6 -->
                 <div class="service-card">
                     <div class="service-card-img">
                         <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80" alt="Service AC Kantor Mataram Lombok">
@@ -2182,78 +1960,6 @@ body.mobile-menu-open {
                     <div class="step-number" style="background: #25D366;">4</div>
                     <h4>AC Nyaman & Garansi</h4>
                     <p>AC Anda kembali dingin optimal dengan garansi service hingga 6 bulan. Bayar setelah puas!</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AREA LAYANAN -->
-    <section class="section" id="area">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge">
-                    <i class="fas fa-map-marker-alt"></i> Jangkauan Kami
-                </div>
-                <h2 class="section-title">Area Layanan Service AC</h2>
-                <p class="section-desc">Kami melayani seluruh wilayah Mataram dan Lombok dengan jangkauan luas untuk kenyamanan Anda.</p>
-            </div>
-            <div class="area-content">
-                <div class="area-map">
-                    <img src="https://images.unsplash.com/photo-1596437494606-185a116a0bd6?w=600&q=80" alt="Peta Area Layanan CoolTech AC Mataram Lombok">
-                    <div class="area-map-overlay">
-                        <h4><i class="fas fa-map-marked-alt"></i> Melayani Seluruh Pulau Lombok</h4>
-                        <p>Kota Mataram, Lombok Barat, Lombok Tengah, Lombok Timur, Lombok Utara & KLU</p>
-                    </div>
-                </div>
-                <div class="area-list">
-                    <div class="area-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Mataram Kota</span>
-                    </div>
-                    <div class="area-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Cakranegara</span>
-                    </div>
-                    <div class="area-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Ampenan</span>
-                    </div>
-                    <div class="area-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Sekarbela</span>
-                    </div>
-                    <div class="area-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Selaparang</span>
-                    </div>
-                    <div class="area-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Sandubaya</span>
-                    </div>
-                    <div class="area-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Lombok Barat</span>
-                    </div>
-                    <div class="area-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Lombok Tengah</span>
-                    </div>
-                    <div class="area-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Lombok Timur</span>
-                    </div>
-                    <div class="area-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Lombok Utara</span>
-                    </div>
-                    <div class="area-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Senggigi</span>
-                    </div>
-                    <div class="area-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Praya & Sekitar</span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -2480,9 +2186,9 @@ body.mobile-menu-open {
                     <h4>Navigasi</h4>
                     <ul class="footer-links">
                         <li><a href="#beranda"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Beranda</a></li>
+                        <li><a href="#layanan"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Layanan</a></li>
                         <li><a href="#keunggulan"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Keunggulan</a></li>
                         <li><a href="#proses"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Cara Kerja</a></li>
-                        <li><a href="#area"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Area Layanan</a></li>
                         <li><a href="#galeri"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Galeri</a></li>
                         <li><a href="#testimoni"><i class="fas fa-chevron-right" style="font-size:0.65rem;"></i> Testimoni</a></li>
                     </ul>
@@ -2528,281 +2234,227 @@ body.mobile-menu-open {
     </a>
 
     <script>
-    // =============================================
-    // COOLTECH AC - FIXED & IMPROVED SCRIPT
-    // =============================================
-
-    // ===== 1. PRELOADER DENGAN FALLBACK =====
-    (function() {
-        const preloader = document.getElementById('preloader');
-        
-        // Pastikan body bisa scroll dari awal
-        document.body.style.overflow = 'auto';
-        document.body.style.position = 'relative';
-        
-        function hidePreloader() {
-            if (preloader) {
-                preloader.classList.add('hidden');
-                // Hapus dari DOM setelah animasi selesai
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 700);
-            }
-            // Pastikan body selalu bisa scroll
+        // ===== PRELOADER DENGAN FALLBACK =====
+        (function() {
+            const preloader = document.getElementById('preloader');
             document.body.style.overflow = 'auto';
-            document.documentElement.style.overflow = 'auto';
-        }
+            document.body.style.position = 'relative';
+            
+            function hidePreloader() {
+                if (preloader) {
+                    preloader.classList.add('hidden');
+                    setTimeout(() => { preloader.style.display = 'none'; }, 700);
+                }
+                document.body.style.overflow = 'auto';
+                document.documentElement.style.overflow = 'auto';
+            }
 
-        // Trigger saat load selesai
-        if (document.readyState === 'complete') {
-            setTimeout(hidePreloader, 800);
-        } else {
-            window.addEventListener('load', () => {
+            if (document.readyState === 'complete') {
                 setTimeout(hidePreloader, 800);
+            } else {
+                window.addEventListener('load', () => setTimeout(hidePreloader, 800));
+            }
+
+            setTimeout(hidePreloader, 4000);
+        })();
+
+        // ===== NAVBAR SCROLL =====
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+
+        function handleScroll() {
+            const scrollY = window.scrollY || window.pageYOffset;
+            
+            if (scrollY > 80) {
+                navbar.classList.add('scrolled');
+                backToTop.classList.add('show');
+            } else {
+                navbar.classList.remove('scrolled');
+                backToTop.classList.remove('show');
+            }
+
+            const sections = document.querySelectorAll('section[id]');
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a:not(.nav-cta)').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
             });
         }
 
-        // FALLBACK: Paksa hilangkan preloader setelah 4 detik
-        // Ini mencegah preloader stuck jika ada error
-        setTimeout(hidePreloader, 4000);
-    })();
+        window.addEventListener('scroll', handleScroll, { passive: true });
 
-    // ===== 2. NAVBAR SCROLL EFFECT =====
-    const navbar = document.getElementById('navbar');
-    const backToTop = document.getElementById('backToTop');
+        // ===== MOBILE MENU =====
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
 
-    function handleScroll() {
-        const scrollY = window.scrollY || window.pageYOffset;
-        
-        if (scrollY > 80) {
-            navbar.classList.add('scrolled');
-            backToTop.classList.add('show');
-        } else {
-            navbar.classList.remove('scrolled');
-            backToTop.classList.remove('show');
-        }
-
-        // Active nav link
-        const sections = document.querySelectorAll('section[id]');
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 150;
-            if (scrollY >= sectionTop) {
-                current = section.getAttribute('id');
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            
+            if (mobileMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
             }
         });
 
-        document.querySelectorAll('.nav-links a:not(.nav-cta)').forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
-                link.classList.add('active');
-            }
-        });
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    // ===== 3. MOBILE MENU (FIXED - TIDAK BLOCK SCROLL) =====
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    hamburger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        this.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-        
-        // Hanya block scroll saat menu terbuka
-        if (mobileMenu.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-        } else {
+        function closeMobile() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
-    });
 
-    function closeMobile() {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        document.body.style.overflow = 'auto'; // Selalu kembalikan scroll
-    }
-
-    // Tutup mobile menu saat klik di luar
-    document.addEventListener('click', function(e) {
-        if (mobileMenu.classList.contains('active') && 
-            !mobileMenu.contains(e.target) && 
-            !hamburger.contains(e.target)) {
-            closeMobile();
-        }
-    });
-
-    // ===== 4. SMOOTH SCROLL UNTUK SEMUA LINK =====
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            
-            if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                const navbarHeight = navbar.offsetHeight;
-                const targetPosition = targetElement.offsetTop - navbarHeight - 10;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+        document.addEventListener('click', function(e) {
+            if (mobileMenu.classList.contains('active') && 
+                !mobileMenu.contains(e.target) && 
+                !hamburger.contains(e.target)) {
+                closeMobile();
             }
         });
-    });
 
-    // ===== 5. SCROLL REVEAL ANIMATION (FIXED) =====
-    // Gunakan CSS class, bukan inline style yang bisa stuck
-    const revealElements = document.querySelectorAll(
-        '.service-card, .advantage-item, .process-step, .area-item, .gallery-item, .testimonial-card'
-    );
-
-    // Tambahkan class awal (bukan inline style)
-    revealElements.forEach(el => {
-        el.classList.add('reveal-init');
-    });
-
-    // IntersectionObserver dengan fallback
-    if ('IntersectionObserver' in window) {
-        const observerOptions = {
-            threshold: 0.15,
-            rootMargin: '0px 0px -30px 0px'
-        };
-
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal-active');
-                    revealObserver.unobserve(entry.target);
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const navbarHeight = navbar.offsetHeight;
+                    const targetPosition = targetElement.offsetTop - navbarHeight - 10;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                 }
             });
-        }, observerOptions);
-
-        revealElements.forEach(el => {
-            revealObserver.observe(el);
         });
 
-        // FALLBACK: Paksa tampilkan semua elemen setelah 5 detik
-        // Jika observer tidak trigger karena alasan apapun
-        setTimeout(() => {
-            revealElements.forEach(el => {
-                el.classList.add('reveal-active');
+        // ===== SCROLL REVEAL =====
+        const revealElements = document.querySelectorAll(
+            '.service-card, .advantage-item, .process-step, .gallery-item, .testimonial-card'
+        );
+
+        revealElements.forEach(el => el.classList.add('reveal-init'));
+
+        if ('IntersectionObserver' in window) {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-active');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+            setTimeout(() => {
+                revealElements.forEach(el => el.classList.add('reveal-active'));
+            }, 5000);
+        } else {
+            revealElements.forEach(el => el.classList.add('reveal-active'));
+        }
+
+        // ===== COUNTER ANIMATION =====
+        let countersAnimated = false;
+        
+        function animateCounters() {
+            if (countersAnimated) return;
+            countersAnimated = true;
+
+            document.querySelectorAll('.stat-number').forEach(counter => {
+                const text = counter.textContent;
+                const match = text.match(/(\d+)/);
+                if (!match) return;
+                
+                const target = parseInt(match[0]);
+                const suffix = text.replace(match[0], '');
+                let current = 0;
+                const increment = Math.ceil(target / 60);
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.innerHTML = current + suffix;
+                }, 30);
             });
-        }, 5000);
-    } else {
-        // Browser tanpa IntersectionObserver - langsung tampilkan semua
-        revealElements.forEach(el => {
-            el.classList.add('reveal-active');
-        });
-    }
+        }
 
-    // ===== 6. COUNTER ANIMATION =====
-    let countersAnimated = false;
-    
-    function animateCounters() {
-        if (countersAnimated) return;
-        countersAnimated = true;
+        const heroStats = document.querySelector('.hero-stats');
+        if (heroStats && 'IntersectionObserver' in window) {
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        heroObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            heroObserver.observe(heroStats);
+        } else {
+            animateCounters();
+        }
 
-        document.querySelectorAll('.stat-number').forEach(counter => {
-            const text = counter.textContent;
-            const match = text.match(/(\d+)/);
-            if (!match) return;
+        // ===== BOOKING FORM → WHATSAPP =====
+        function sendToWhatsApp(e) {
+            e.preventDefault();
+
+            const nama = document.getElementById('nama').value.trim();
+            const telepon = document.getElementById('telepon').value.trim();
+            const alamat = document.getElementById('alamat').value.trim();
+            const layanan = document.getElementById('layananSelect').value;
+            const keluhan = document.getElementById('keluhan').value.trim();
+
+            if (!nama || !telepon || !alamat || !layanan) {
+                alert('Mohon lengkapi semua field yang wajib diisi!');
+                return false;
+            }
+
+            let pesan = `Halo CoolTech AC Service! 🙏\n\n`;
+            pesan += `Saya ingin booking layanan service AC:\n\n`;
+            pesan += `📋 *Data Pemesan*\n`;
+            pesan += `━━━━━━━━━━━━━━━━━━\n`;
+            pesan += `👤 Nama: ${nama}\n`;
+            pesan += `📱 Telepon: ${telepon}\n`;
+            pesan += `📍 Alamat: ${alamat}\n`;
+            pesan += `🔧 Layanan: ${layanan}\n`;
+            pesan += `━━━━━━━━━━━━━━━━━━\n\n`;
             
-            const target = parseInt(match[0]);
-            const suffix = text.replace(match[0], '');
-            let current = 0;
-            const increment = Math.ceil(target / 60);
+            if (keluhan) {
+                pesan += `📝 *Keluhan/Catatan:*\n${keluhan}\n\n`;
+            }
             
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                counter.innerHTML = current + suffix;
-            }, 30);
-        });
-    }
+            pesan += `Mohon info jadwal dan estimasi biayanya. Terima kasih! 🙏`;
 
-    // Observer untuk counter
-    const heroStats = document.querySelector('.hero-stats');
-    if (heroStats && 'IntersectionObserver' in window) {
-        const heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    heroObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        heroObserver.observe(heroStats);
-    } else {
-        // Fallback jika observer tidak tersedia
-        animateCounters();
-    }
-
-    // ===== 7. BOOKING FORM → WHATSAPP =====
-    function sendToWhatsApp(e) {
-        e.preventDefault();
-
-        const nama = document.getElementById('nama').value.trim();
-        const telepon = document.getElementById('telepon').value.trim();
-        const alamat = document.getElementById('alamat').value.trim();
-        const layanan = document.getElementById('layananSelect').value;
-        const keluhan = document.getElementById('keluhan').value.trim();
-
-        if (!nama || !telepon || !alamat || !layanan) {
-            alert('Mohon lengkapi semua field yang wajib diisi!');
+            const waURL = `https://wa.me/6281234567890?text=${encodeURIComponent(pesan)}`;
+            window.open(waURL, '_blank');
+            document.getElementById('bookingForm').reset();
             return false;
         }
 
-        let pesan = `Halo CoolTech AC Service! 🙏\n\n`;
-        pesan += `Saya ingin booking layanan service AC:\n\n`;
-        pesan += `📋 *Data Pemesan*\n`;
-        pesan += `━━━━━━━━━━━━━━━━━━\n`;
-        pesan += `👤 Nama: ${nama}\n`;
-        pesan += `📱 Telepon: ${telepon}\n`;
-        pesan += `📍 Alamat: ${alamat}\n`;
-        pesan += `🔧 Layanan: ${layanan}\n`;
-        pesan += `━━━━━━━━━━━━━━━━━━\n\n`;
-        
-        if (keluhan) {
-            pesan += `📝 *Keluhan/Catatan:*\n${keluhan}\n\n`;
-        }
-        
-        pesan += `Mohon info jadwal dan estimasi biayanya. Terima kasih! 🙏`;
+        // ===== SCROLL GUARD =====
+        setInterval(() => {
+            const computedOverflow = window.getComputedStyle(document.body).overflow;
+            const mobileActive = mobileMenu.classList.contains('active');
+            
+            if (!mobileActive && computedOverflow === 'hidden') {
+                document.body.style.overflow = 'auto';
+                document.documentElement.style.overflow = 'auto';
+            }
+        }, 2000);
 
-        const waURL = `https://wa.me/6281234567890?text=${encodeURIComponent(pesan)}`;
-        window.open(waURL, '_blank');
-        
-        // Reset form setelah submit
-        document.getElementById('bookingForm').reset();
-        return false;
-    }
-
-    // ===== 8. SECURITY: Pastikan scroll selalu aktif =====
-    // Cek berkala jika ada yang memblokir scroll
-    setInterval(() => {
-        const computedOverflow = window.getComputedStyle(document.body).overflow;
-        const mobileActive = mobileMenu.classList.contains('active');
-        
-        // Jika mobile menu TIDAK aktif tapi overflow hidden, paksa auto
-        if (!mobileActive && computedOverflow === 'hidden') {
-            document.body.style.overflow = 'auto';
-            document.documentElement.style.overflow = 'auto';
-        }
-    }, 2000);
-
-    // ===== 9. KONSOLE LOG =====
-    console.log('✅ CoolTech AC Service - Script loaded successfully!');
-    console.log('📱 WhatsApp: 6281234567890');
-</script>
-
-    
+        console.log('✅ CoolTech AC Service - Script loaded successfully!');
+    </script>
 </body>
 </html>
