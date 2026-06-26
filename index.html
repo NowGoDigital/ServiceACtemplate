@@ -6,6 +6,20 @@
     <title>CoolTech AC Service - Jasa Service AC Profesional Mataram Lombok</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="CoolTech AC">
+    <meta name="application-name" content="CoolTech AC">
+    <meta name="theme-color" content="#1a1a2e">
+    <link rel="apple-touch-icon" href="https://via.placeholder.com/192x192/0066ff/ffffff?text=CT">
+    
+    
+    
+    
+    
     <style>
         * {
             margin: 0;
@@ -1602,6 +1616,450 @@
             .btn { width: 100%; justify-content: center; }
             .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
         }
+
+    /* ===== MOBILE APP-LIKE UI ===== */
+
+/* === BOTTOM NAVIGATION BAR (APP-LIKE) === */
+.bottom-nav {
+    display: none; /* Default hidden, muncul di mobile */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    z-index: 998;
+    padding: 8px 0;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px)); /* Untuk HP dengan notch/home indicator */
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.bottom-nav-inner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: var(--gray);
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    min-width: 60px;
+}
+
+.bottom-nav-item i {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.bottom-nav-item.active,
+.bottom-nav-item:hover {
+    color: var(--primary);
+}
+
+.bottom-nav-item.active i {
+    transform: scale(1.15);
+}
+
+.bottom-nav-item.active::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 3px;
+    background: var(--gradient-primary);
+    border-radius: 0 0 3px 3px;
+}
+
+/* Special booking button di bottom nav */
+.bottom-nav-item.nav-booking {
+    background: var(--gradient-primary);
+    color: white !important;
+    border-radius: 16px;
+    padding: 10px 16px;
+    margin-top: -20px;
+    box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+}
+
+.bottom-nav-item.nav-booking i {
+    font-size: 1.3rem;
+}
+
+.bottom-nav-item.nav-booking:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 102, 255, 0.5);
+}
+
+/* === SIDEBAR DRAWER (APP-LIKE) === */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar-drawer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    max-width: 85vw;
+    height: 100%;
+    background: var(--white);
+    z-index: 1002;
+    transform: translateX(-100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-drawer.active {
+    transform: translateX(0);
+}
+
+.sidebar-header {
+    background: var(--gradient-primary);
+    padding: 40px 24px 30px;
+    padding-top: calc(40px + env(safe-area-inset-top, 0px));
+    position: relative;
+}
+
+.sidebar-header .sidebar-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    top: calc(15px + env(safe-area-inset-top, 0px));
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.sidebar-header .sidebar-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.sidebar-logo .logo-circle {
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.sidebar-logo-text h3 {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.sidebar-logo-text span {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+}
+
+.sidebar-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px 14px;
+    border-radius: 50px;
+    color: white;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+.sidebar-status .status-dot {
+    width: 8px;
+    height: 8px;
+    background: #25D366;
+    border-radius: 50%;
+    animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.sidebar-menu {
+    padding: 16px 0;
+}
+
+.sidebar-menu-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 12px 24px 8px;
+}
+
+.sidebar-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 24px;
+    color: var(--dark);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-menu-item:hover,
+.sidebar-menu-item.active {
+    background: rgba(0, 102, 255, 0.05);
+    color: var(--primary);
+    border-left-color: var(--primary);
+}
+
+.sidebar-menu-item i {
+    width: 24px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.sidebar-menu-item .menu-badge {
+    margin-left: auto;
+    background: var(--gradient-accent);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 50px;
+}
+
+.sidebar-divider {
+    height: 1px;
+    background: #eee;
+    margin: 8px 24px;
+}
+
+.sidebar-footer {
+    padding: 20px 24px;
+    border-top: 1px solid #eee;
+    margin-top: auto;
+}
+
+.sidebar-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    padding: 14px 20px;
+    border-radius: 14px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+}
+
+.sidebar-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+}
+
+/* === RESPONSIVE: AKTIFKAN APP-LIKE UI DI MOBILE === */
+@media (max-width: 768px) {
+    .bottom-nav {
+        display: block; /* Tampilkan bottom nav */
+    }
+
+    .sidebar-drawer,
+    .sidebar-overlay {
+        display: block; /* Aktifkan sidebar */
+    }
+
+    /* Hapus fullscreen mobile menu lama */
+    .mobile-menu {
+        display: none !important;
+    }
+
+    /* Tambahkan padding bawah agar konten tidak tertutup bottom nav */
+    body {
+        padding-bottom: 80px !important;
+    }
+
+    .footer {
+        padding-bottom: 100px; /* Footer tidak tertutup bottom nav */
+    }
+
+    /* Hide WA floating di mobile (sudah ada di bottom nav) */
+    .wa-float {
+        bottom: 90px; /* Geser ke atas agar tidak tertutup bottom nav */
+    }
+
+    .back-to-top {
+        bottom: 90px; /* Geser ke atas juga */
+    }
+
+    /* Hamburger → icon sidebar */
+    .hamburger {
+        display: flex !important;
+    }
+}
+
+/* === PWA INSTALL PROMPT (optional) === */
+.pwa-install-banner {
+    display: none;
+    position: fixed;
+    bottom: 80px; /* Di atas bottom nav */
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--white);
+    padding: 16px 24px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    z-index: 997;
+    max-width: 90%;
+    width: 400px;
+    align-items: center;
+    gap: 16px;
+    animation: slideUpInstall 0.5s ease;
+}
+
+.pwa-install-banner.show {
+    display: flex;
+}
+
+@keyframes slideUpInstall {
+    from { transform: translateX(-50%) translateY(100px); opacity: 0; }
+    to { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+.pwa-install-banner .install-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--gradient-primary);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.pwa-install-banner .install-text {
+    flex: 1;
+}
+
+.pwa-install-banner .install-text h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2px;
+}
+
+.pwa-install-banner .install-text p {
+    font-size: 0.75rem;
+    color: var(--gray);
+}
+
+.pwa-install-banner .install-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.pwa-install-banner .btn-install {
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pwa-install-banner .btn-install-yes {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.pwa-install-banner .btn-install-no {
+    background: #f0f0f0;
+    color: var(--gray);
+}
+
+@media (max-width: 768px) {
+    .pwa-install-banner.show {
+        display: flex;
+    }
+}
+
+@media (min-width: 769px) {
+    .pwa-install-banner {
+        display: none !important;
+    }
+}
+
+/* === SAFE AREA untuk HP dengan notch === */
+@supports (padding: env(safe-area-inset-top)) {
+    .sidebar-header {
+        padding-top: calc(40px + env(safe-area-inset-top));
+    }
+    .bottom-nav {
+        padding-bottom: calc(8px + env(safe-area-inset-bottom));
+    }
+}
+
+        
     </style>
 </head>
 <body>
@@ -1635,7 +2093,7 @@
                 <li><a href="#testimoni">Testimoni</a></li>
                 <li><a href="#booking" class="nav-cta"><i class="fab fa-whatsapp"></i> Booking</a></li>
             </ul>
-            <div class="hamburger" id="hamburger">
+            <div class="hamburger" id="hamburger" onclick="openSidebar()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -1656,6 +2114,118 @@
         </a>
     </div>
 
+    <!-- SIDEBAR DRAWER (APP-LIKE) -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<div class="sidebar-drawer" id="sidebarDrawer">
+    <div class="sidebar-header">
+        <button class="sidebar-close" onclick="closeSidebar()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="sidebar-logo">
+            <div class="logo-circle">
+                <i class="fas fa-snowflake"></i>
+            </div>
+            <div class="sidebar-logo-text">
+                <h3>CoolTech AC</h3>
+                <span>Service Profesional</span>
+            </div>
+        </div>
+        <div class="sidebar-status">
+            <div class="status-dot"></div>
+            Buka Hari Ini • 08.00 - 21.00 WITA
+        </div>
+    </div>
+
+    <div class="sidebar-menu">
+        <div class="sidebar-menu-label">Menu Utama</div>
+        <a href="#beranda" class="sidebar-menu-item active" onclick="closeSidebar()">
+            <i class="fas fa-home"></i> Beranda
+        </a>
+        <a href="#layanan" class="sidebar-menu-item" onclick="closeSidebar()">
+            <i class="fas fa-cogs"></i> Layanan
+            <span class="menu-badge">6 Layanan</span>
+        </a>
+        <a href="#keunggulan" class="sidebar-menu-item" onclick="closeSidebar()">
+            <i class="fas fa-trophy"></i> Keunggulan
+        </a>
+        <a href="#proses" class="sidebar-menu-item" onclick="closeSidebar()">
+            <i class="fas fa-list-ol"></i> Cara Kerja
+        </a>
+
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-menu-label">Lainnya</div>
+
+        <a href="#galeri" class="sidebar-menu-item" onclick="closeSidebar()">
+            <i class="fas fa-images"></i> Galeri
+        </a>
+        <a href="#testimoni" class="sidebar-menu-item" onclick="closeSidebar()">
+            <i class="fas fa-comments"></i> Testimoni
+        </a>
+
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-menu-label">Kontak</div>
+
+        <a href="tel:+6281234567890" class="sidebar-menu-item">
+            <i class="fas fa-phone-alt"></i> 081-234-567-890
+        </a>
+        <a href="mailto:info@cooltechac.id" class="sidebar-menu-item">
+            <i class="fas fa-envelope"></i> info@cooltechac.id
+        </a>
+        <a href="#" class="sidebar-menu-item">
+            <i class="fas fa-map-marker-alt"></i> Jl. Pejanggik No. 123, Mataram
+        </a>
+    </div>
+
+    <div class="sidebar-footer">
+        <a href="https://wa.me/6281234567890?text=Halo%20CoolTech%20AC,%20saya%20ingin%20konsultasi%20tentang%20service%20AC." class="sidebar-cta" target="_blank">
+            <i class="fab fa-whatsapp"></i> Chat WhatsApp Sekarang
+        </a>
+    </div>
+</div>
+
+<!-- BOTTOM NAVIGATION BAR (APP-LIKE) -->
+<nav class="bottom-nav" id="bottomNav">
+    <div class="bottom-nav-inner">
+        <a href="#beranda" class="bottom-nav-item active" data-section="beranda">
+            <i class="fas fa-home"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="#layanan" class="bottom-nav-item" data-section="layanan">
+            <i class="fas fa-cogs"></i>
+            <span>Layanan</span>
+        </a>
+        <a href="#booking" class="bottom-nav-item nav-booking" data-section="booking">
+            <i class="fab fa-whatsapp"></i>
+            <span>Booking</span>
+        </a>
+        <a href="#galeri" class="bottom-nav-item" data-section="galeri">
+            <i class="fas fa-images"></i>
+            <span>Galeri</span>
+        </a>
+        <a href="#testimoni" class="bottom-nav-item" data-section="testimoni">
+            <i class="fas fa-star"></i>
+            <span>Review</span>
+        </a>
+    </div>
+</nav>
+
+<!-- PWA INSTALL BANNER (Muncul otomatis di mobile) -->
+<div class="pwa-install-banner" id="pwaInstallBanner">
+    <div class="install-icon"><i class="fas fa-snowflake"></i></div>
+    <div class="install-text">
+        <h4>Pasang CoolTech AC</h4>
+        <p>Akses lebih cepat dari layar utama</p>
+    </div>
+    <div class="install-actions">
+        <button class="btn-install btn-install-yes" id="pwaInstallBtn">Pasang</button>
+        <button class="btn-install btn-install-no" onclick="document.getElementById('pwaInstallBanner').classList.remove('show')">Nanti</button>
+    </div>
+</div>
+
+
+
+
+    
     <!-- HERO SECTION -->
     <section class="hero" id="beranda">
         <div class="hero-particles">
@@ -2456,6 +3026,116 @@
         }, 2000);
 
         console.log('✅ CoolTech AC Service - Script loaded successfully!');
+
+        // ===== SIDEBAR DRAWER (APP-LIKE) =====
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const sidebarDrawer = document.getElementById('sidebarDrawer');
+
+function openSidebar() {
+    sidebarOverlay.classList.add('active');
+    sidebarDrawer.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSidebar() {
+    sidebarOverlay.classList.remove('active');
+    sidebarDrawer.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Tutup sidebar saat tekan Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeSidebar();
+});
+
+// Swipe to close sidebar (touch gesture)
+let touchStartX = 0;
+let touchEndX = 0;
+
+sidebarDrawer.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+
+sidebarDrawer.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    if (touchStartX - touchEndX > 80) { // Swipe kiri = tutup
+        closeSidebar();
+    }
+}, { passive: true });
+
+// Swipe dari kiri layar untuk buka sidebar
+document.addEventListener('touchstart', function(e) {
+    if (e.touches[0].clientX < 30 && !sidebarDrawer.classList.contains('active')) {
+        touchStartX = e.touches[0].clientX;
+    }
+}, { passive: true });
+
+document.addEventListener('touchend', function(e) {
+    if (touchStartX < 30) {
+        touchEndX = e.changedTouches[0].clientX;
+        if (touchEndX - touchStartX > 60) { // Swipe kanan dari tepi = buka
+            openSidebar();
+        }
+    }
+}, { passive: true });
+
+// ===== BOTTOM NAV ACTIVE STATE =====
+const bottomNavItems = document.querySelectorAll('.bottom-nav-item[data-section]');
+
+function updateBottomNav() {
+    const scrollY = window.scrollY || window.pageYOffset;
+    const sections = document.querySelectorAll('section[id]');
+    let currentSection = '';
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 200;
+        if (scrollY >= sectionTop) {
+            currentSection = section.getAttribute('id');
+        }
+    });
+
+    bottomNavItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('data-section') === currentSection) {
+            item.classList.add('active');
+        }
+    });
+}
+
+window.addEventListener('scroll', updateBottomNav, { passive: true });
+
+// ===== PWA INSTALL PROMPT =====
+let deferredPrompt;
+const pwaInstallBanner = document.getElementById('pwaInstallBanner');
+const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    
+    // Tampilkan banner hanya di mobile
+    if (window.innerWidth <= 768) {
+        setTimeout(() => {
+            pwaInstallBanner.classList.add('show');
+        }, 5000); // Tampilkan setelah 5 detik
+    }
+});
+
+if (pwaInstallBtn) {
+    pwaInstallBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                console.log('✅ PWA installed!');
+            }
+            deferredPrompt = null;
+            pwaInstallBanner.classList.remove('show');
+        }
+    });
+}
+
+        
     </script>
 </body>
 </html>
