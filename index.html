@@ -1736,6 +1736,85 @@
                 grid-template-rows: auto;
             }
         }
+
+        
+    /* ===== REVEAL ANIMATION SYSTEM (FIXED) ===== */
+.reveal-init {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-active {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Staggered animation untuk grid items */
+.service-card.reveal-init:nth-child(1) { transition-delay: 0.05s; }
+.service-card.reveal-init:nth-child(2) { transition-delay: 0.1s; }
+.service-card.reveal-init:nth-child(3) { transition-delay: 0.15s; }
+.service-card.reveal-init:nth-child(4) { transition-delay: 0.2s; }
+.service-card.reveal-init:nth-child(5) { transition-delay: 0.25s; }
+.service-card.reveal-init:nth-child(6) { transition-delay: 0.3s; }
+
+.advantage-item.reveal-init:nth-child(1) { transition-delay: 0.05s; }
+.advantage-item.reveal-init:nth-child(2) { transition-delay: 0.1s; }
+.advantage-item.reveal-init:nth-child(3) { transition-delay: 0.15s; }
+.advantage-item.reveal-init:nth-child(4) { transition-delay: 0.2s; }
+.advantage-item.reveal-init:nth-child(5) { transition-delay: 0.25s; }
+
+.process-step.reveal-init:nth-child(1) { transition-delay: 0.05s; }
+.process-step.reveal-init:nth-child(2) { transition-delay: 0.15s; }
+.process-step.reveal-init:nth-child(3) { transition-delay: 0.25s; }
+.process-step.reveal-init:nth-child(4) { transition-delay: 0.35s; }
+
+/* FALLBACK: Jika JS tidak jalan, semua konten tetap tampil */
+noscript ~ * .service-card,
+noscript ~ * .advantage-item,
+noscript ~ * .process-step,
+noscript ~ * .area-item,
+noscript ~ * .gallery-item,
+noscript ~ * .testimonial-card {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* Pastikan preloader tidak block interaksi */
+.preloader {
+    pointer-events: none; /* Jangan block klik */
+}
+
+.preloader:not(.hidden) {
+    pointer-events: all; /* Block hanya saat loading */
+}
+
+/* Pastikan body selalu bisa scroll */
+html, body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+/* Override saat mobile menu aktif */
+body.mobile-menu-open {
+    overflow-y: hidden !important;
+}
+
+/* Fallback untuk browser lama */
+@supports not (backdrop-filter: blur(20px)) {
+    .navbar.scrolled {
+        background: rgba(255, 255, 255, 0.98);
+    }
+    .booking-form-wrapper {
+        background: rgba(26, 26, 46, 0.95);
+    }
+}
+    
+    
+    
+    
+    
     </style>
 </head>
 <body>
@@ -2449,137 +2528,209 @@
     </a>
 
     <script>
-        // ===== PRELOADER =====
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('preloader').classList.add('hidden');
-            }, 1500);
-        });
+    // =============================================
+    // COOLTECH AC - FIXED & IMPROVED SCRIPT
+    // =============================================
 
-        // ===== NAVBAR SCROLL =====
-        const navbar = document.getElementById('navbar');
-        const backToTop = document.getElementById('backToTop');
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 80) {
-                navbar.classList.add('scrolled');
-                backToTop.classList.add('show');
-            } else {
-                navbar.classList.remove('scrolled');
-                backToTop.classList.remove('show');
+    // ===== 1. PRELOADER DENGAN FALLBACK =====
+    (function() {
+        const preloader = document.getElementById('preloader');
+        
+        // Pastikan body bisa scroll dari awal
+        document.body.style.overflow = 'auto';
+        document.body.style.position = 'relative';
+        
+        function hidePreloader() {
+            if (preloader) {
+                preloader.classList.add('hidden');
+                // Hapus dari DOM setelah animasi selesai
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 700);
             }
-
-            // Active nav link
-            const sections = document.querySelectorAll('section[id], .hero[id]');
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 150;
-                if (window.scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // ===== HAMBURGER MENU =====
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-        });
-
-        function closeMobile() {
-            hamburger.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = '';
+            // Pastikan body selalu bisa scroll
+            document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
         }
 
-        // ===== BOOKING FORM -> WHATSAPP =====
-        function sendToWhatsApp(e) {
+        // Trigger saat load selesai
+        if (document.readyState === 'complete') {
+            setTimeout(hidePreloader, 800);
+        } else {
+            window.addEventListener('load', () => {
+                setTimeout(hidePreloader, 800);
+            });
+        }
+
+        // FALLBACK: Paksa hilangkan preloader setelah 4 detik
+        // Ini mencegah preloader stuck jika ada error
+        setTimeout(hidePreloader, 4000);
+    })();
+
+    // ===== 2. NAVBAR SCROLL EFFECT =====
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+
+    function handleScroll() {
+        const scrollY = window.scrollY || window.pageYOffset;
+        
+        if (scrollY > 80) {
+            navbar.classList.add('scrolled');
+            backToTop.classList.add('show');
+        } else {
+            navbar.classList.remove('scrolled');
+            backToTop.classList.remove('show');
+        }
+
+        // Active nav link
+        const sections = document.querySelectorAll('section[id]');
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 150;
+            if (scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        document.querySelectorAll('.nav-links a:not(.nav-cta)').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // ===== 3. MOBILE MENU (FIXED - TIDAK BLOCK SCROLL) =====
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        
+        // Hanya block scroll saat menu terbuka
+        if (mobileMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    function closeMobile() {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Selalu kembalikan scroll
+    }
+
+    // Tutup mobile menu saat klik di luar
+    document.addEventListener('click', function(e) {
+        if (mobileMenu.classList.contains('active') && 
+            !mobileMenu.contains(e.target) && 
+            !hamburger.contains(e.target)) {
+            closeMobile();
+        }
+    });
+
+    // ===== 4. SMOOTH SCROLL UNTUK SEMUA LINK =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
             e.preventDefault();
-
-            const nama = document.getElementById('nama').value;
-            const telepon = document.getElementById('telepon').value;
-            const alamat = document.getElementById('alamat').value;
-            const layanan = document.getElementById('layananSelect').value;
-            const keluhan = document.getElementById('keluhan').value;
-
-            let pesan = `Halo CoolTech AC Service! 🙏%0A%0A`;
-            pesan += `Saya ingin booking layanan service AC:%0A%0A`;
-            pesan += `📋 *Data Pemesan*%0A`;
-            pesan += `━━━━━━━━━━━━━━━━━━%0A`;
-            pesan += `👤 Nama: ${nama}%0A`;
-            pesan += `📱 Telepon: ${telepon}%0A`;
-            pesan += `📍 Alamat: ${alamat}%0A`;
-            pesan += `🔧 Layanan: ${layanan}%0A`;
-            pesan += `━━━━━━━━━━━━━━━━━━%0A%0A`;
+            const targetId = this.getAttribute('href');
             
-            if (keluhan) {
-                pesan += `📝 *Keluhan/Catatan:*%0A${keluhan}%0A%0A`;
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const navbarHeight = navbar.offsetHeight;
+                const targetPosition = targetElement.offsetTop - navbarHeight - 10;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
             }
-            
-            pesan += `Mohon info jadwal dan estimasi biayanya. Terima kasih! 🙏`;
+        });
+    });
 
-            const waURL = `https://wa.me/6281234567890?text=${pesan}`;
-            window.open(waURL, '_blank');
-            return false;
-        }
+    // ===== 5. SCROLL REVEAL ANIMATION (FIXED) =====
+    // Gunakan CSS class, bukan inline style yang bisa stuck
+    const revealElements = document.querySelectorAll(
+        '.service-card, .advantage-item, .process-step, .area-item, .gallery-item, .testimonial-card'
+    );
 
-        // ===== SCROLL REVEAL ANIMATION =====
+    // Tambahkan class awal (bukan inline style)
+    revealElements.forEach(el => {
+        el.classList.add('reveal-init');
+    });
+
+    // IntersectionObserver dengan fallback
+    if ('IntersectionObserver' in window) {
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.15,
+            rootMargin: '0px 0px -30px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('reveal-active');
+                    revealObserver.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.service-card, .advantage-item, .process-step, .area-item, .gallery-item, .testimonial-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-            observer.observe(el);
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
         });
 
-        // ===== COUNTER ANIMATION =====
-        function animateCounters() {
-            document.querySelectorAll('.stat-number').forEach(counter => {
-                const text = counter.textContent;
-                const match = text.match(/(\d+)/);
-                if (!match) return;
-                
-                const target = parseInt(match[0]);
-                const suffix = text.replace(match[0], '');
-                let current = 0;
-                const increment = target / 60;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    counter.innerHTML = Math.floor(current) + suffix;
-                }, 30);
+        // FALLBACK: Paksa tampilkan semua elemen setelah 5 detik
+        // Jika observer tidak trigger karena alasan apapun
+        setTimeout(() => {
+            revealElements.forEach(el => {
+                el.classList.add('reveal-active');
             });
-        }
+        }, 5000);
+    } else {
+        // Browser tanpa IntersectionObserver - langsung tampilkan semua
+        revealElements.forEach(el => {
+            el.classList.add('reveal-active');
+        });
+    }
 
-        // Trigger counter animation when hero is visible
+    // ===== 6. COUNTER ANIMATION =====
+    let countersAnimated = false;
+    
+    function animateCounters() {
+        if (countersAnimated) return;
+        countersAnimated = true;
+
+        document.querySelectorAll('.stat-number').forEach(counter => {
+            const text = counter.textContent;
+            const match = text.match(/(\d+)/);
+            if (!match) return;
+            
+            const target = parseInt(match[0]);
+            const suffix = text.replace(match[0], '');
+            let current = 0;
+            const increment = Math.ceil(target / 60);
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                counter.innerHTML = current + suffix;
+            }, 30);
+        });
+    }
+
+    // Observer untuk counter
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats && 'IntersectionObserver' in window) {
         const heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2589,8 +2740,69 @@
             });
         }, { threshold: 0.5 });
 
-        const heroStats = document.querySelector('.hero-stats');
-        if (heroStats) heroObserver.observe(heroStats);
-    </script>
+        heroObserver.observe(heroStats);
+    } else {
+        // Fallback jika observer tidak tersedia
+        animateCounters();
+    }
+
+    // ===== 7. BOOKING FORM → WHATSAPP =====
+    function sendToWhatsApp(e) {
+        e.preventDefault();
+
+        const nama = document.getElementById('nama').value.trim();
+        const telepon = document.getElementById('telepon').value.trim();
+        const alamat = document.getElementById('alamat').value.trim();
+        const layanan = document.getElementById('layananSelect').value;
+        const keluhan = document.getElementById('keluhan').value.trim();
+
+        if (!nama || !telepon || !alamat || !layanan) {
+            alert('Mohon lengkapi semua field yang wajib diisi!');
+            return false;
+        }
+
+        let pesan = `Halo CoolTech AC Service! 🙏\n\n`;
+        pesan += `Saya ingin booking layanan service AC:\n\n`;
+        pesan += `📋 *Data Pemesan*\n`;
+        pesan += `━━━━━━━━━━━━━━━━━━\n`;
+        pesan += `👤 Nama: ${nama}\n`;
+        pesan += `📱 Telepon: ${telepon}\n`;
+        pesan += `📍 Alamat: ${alamat}\n`;
+        pesan += `🔧 Layanan: ${layanan}\n`;
+        pesan += `━━━━━━━━━━━━━━━━━━\n\n`;
+        
+        if (keluhan) {
+            pesan += `📝 *Keluhan/Catatan:*\n${keluhan}\n\n`;
+        }
+        
+        pesan += `Mohon info jadwal dan estimasi biayanya. Terima kasih! 🙏`;
+
+        const waURL = `https://wa.me/6281234567890?text=${encodeURIComponent(pesan)}`;
+        window.open(waURL, '_blank');
+        
+        // Reset form setelah submit
+        document.getElementById('bookingForm').reset();
+        return false;
+    }
+
+    // ===== 8. SECURITY: Pastikan scroll selalu aktif =====
+    // Cek berkala jika ada yang memblokir scroll
+    setInterval(() => {
+        const computedOverflow = window.getComputedStyle(document.body).overflow;
+        const mobileActive = mobileMenu.classList.contains('active');
+        
+        // Jika mobile menu TIDAK aktif tapi overflow hidden, paksa auto
+        if (!mobileActive && computedOverflow === 'hidden') {
+            document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
+        }
+    }, 2000);
+
+    // ===== 9. KONSOLE LOG =====
+    console.log('✅ CoolTech AC Service - Script loaded successfully!');
+    console.log('📱 WhatsApp: 6281234567890');
+</script>
+
+    
 </body>
 </html>
